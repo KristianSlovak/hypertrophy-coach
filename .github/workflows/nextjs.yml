@@ -8,8 +8,12 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
+    paths:
+      - "app"
   pull_request:
     branches: ["main"]
+    paths:
+      - "app"
 
 jobs:
   # Build job
@@ -22,8 +26,6 @@ jobs:
           token: ${{ secrets.Hypertrophy-token}}
       - name: Setup Node
         uses: actions/setup-node@v4
-        with:
-          token: ${{ secrets.Hypertrophy-token}}
         with:
           node-version: "20"
           cache: npm
