@@ -19,7 +19,7 @@ app.use(
 );
 
 app.get("/", (req: Request, res: Response) => {
-  res.send({ message: "Express + Typescript Server" });
+  res.send("Express + Typescript Server");
 });
 
 app.listen(process.env.SERVER_SIDE_PORT, () => {
