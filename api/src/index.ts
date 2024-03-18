@@ -36,3 +36,5 @@ const connection = mysql.createConnection({
 connection.connect();
 
 connection.end();
+
+module.exports = app;
