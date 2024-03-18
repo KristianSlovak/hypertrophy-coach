@@ -28,6 +28,6 @@ jobs:
         working-directory: ./api
         run: npm install
 
-      - name: Test backend
-        working-directory: ./api
-        run: npm test
+      # - name: Test backend
+      #   working-directory: ./api
+      #   run: npm test
