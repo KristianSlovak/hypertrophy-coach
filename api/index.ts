@@ -38,8 +38,3 @@ connection.connect();
 connection.end();
 
 module.exports = app;
-// hello
-//hello
-//hello
-//hello
-//hello
