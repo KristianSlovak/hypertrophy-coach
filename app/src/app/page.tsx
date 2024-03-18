@@ -13,7 +13,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost:3001/')
+        const res = await fetch(process.env.SERVER_SIDE_PROXY + '/')
         const responseData = await res.json()
           setData(responseData.message);
       } catch (err) {
