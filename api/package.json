@@ -4,10 +4,10 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "start": "nodemon src/index.ts",
+    "start": "node dist/index.js",
     "build": "rimraf dist && tsc",
     "ts.check": "tsc --project tsconfig.json",
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon index.ts",
     "add-build": "git add dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
