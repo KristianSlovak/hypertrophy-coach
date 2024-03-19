@@ -37,6 +37,6 @@ connection.connect();
 
 connection.end();
 
-module.exports = app;
+export default app;
 console.log("hello");
 console.log("ello");
