@@ -1,11 +1,11 @@
 import cors from "cors";
 import dotenv from "dotenv";
-import express, { Express, Request, Response } from "express";
+import express, { Application, Request, Response } from "express";
 import mysql from "mysql";
 
 dotenv.config();
 
-const app: Express = express();
+const app: Application = express();
 app.use(
   cors({
     origin:
@@ -37,6 +37,6 @@ connection.connect();
 
 connection.end();
 
-export default app;
+module.exports = app;
 console.log("hello");
 console.log("ello");
