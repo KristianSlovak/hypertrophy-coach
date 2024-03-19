@@ -32,8 +32,15 @@ const connection = mysql.createConnection({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE,
 });
-
-connection.connect();
+try {
+  connection.connect();
+} catch (error) {
+  if (!(error instanceof Error)) {
+    throw new Error("Connection to database");
+  } else {
+    console.log({ message: error.message, name: error.name });
+  }
+}
 
 connection.end();
 
