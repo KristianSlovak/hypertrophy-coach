@@ -40,6 +40,8 @@ try {
   } else {
     console.log({ message: error.message, name: error.name });
   }
+} finally {
+  connection.end();
 }
 
 connection.end();
