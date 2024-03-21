@@ -45,4 +45,3 @@ try {
 }
 
 module.exports = app;
-console.log("hello");
