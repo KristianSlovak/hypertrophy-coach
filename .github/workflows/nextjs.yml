@@ -8,12 +8,10 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-    paths-ignore:
-      - "api"
+    paths-ignore: ["api"]
   pull_request:
     branches: ["main"]
-    paths-ignore:
-      - "api"
+    paths-ignore: ["api"]
 
 jobs:
   # Build job
