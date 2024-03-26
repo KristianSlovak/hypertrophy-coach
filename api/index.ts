@@ -5,12 +5,27 @@ import mysql from "mysql";
 
 dotenv.config();
 
+const env_settings = {
+  dbConnSettings: {
+    host: process.env.DATABASE_HOST,
+    database: process.env.DATABASE,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+  },
+  port: process.env.SERVER_SIDE_PORT,
+  frontend_port: process.env.SERVER_SIDE_FRONTEND_APP,
+};
+
+const connection_pool = mysql.createPool(env_settings.dbConnSettings);
+
+connection_pool.on("error", (err) => {
+  console.error("MySQL Pool Error:", err);
+});
+
 const app: Application = express();
 app.use(
   cors({
-    origin:
-      process.env.SERVER_SIDE_FRONTEND_APP ||
-      process.env.SERVER_SIDE_FRONTEND_APP_TEST,
+    origin: env_settings.frontend_port,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -19,31 +34,11 @@ app.use(
 );
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Express + Typescript Server");
+  res.send({ message: "Express + Typescript Server" });
 });
 
-app.listen(process.env.SERVER_SIDE_PORT, () => {
-  console.log("Server is running on port 3001.");
+app.listen(env_settings.port, () => {
+  console.log(`Server is running on port ${env_settings.port}.`);
 });
-
-const connection = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  database: process.env.DATABASE,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  // port: 3306,
-});
-try {
-  connection.connect();
-} catch (error) {
-  if (!(error instanceof Error)) {
-    throw new Error("Connection to database");
-  } else {
-    console.log({ message: error.message, name: error.name });
-  }
-} finally {
-  connection.end();
-}
 
 module.exports = app;
-console.log("hello");
