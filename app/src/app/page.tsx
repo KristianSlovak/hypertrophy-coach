@@ -20,13 +20,12 @@ const Home = () => {
         console.log(err)
       }
     };
-    console.log('hello')
     fetchData();
-  }, []);
+  }, [data]);
 
   return (
     <div>
-      <p>{data}</p>
+      <h1>{data}</h1>
     </div>
   )
 };
