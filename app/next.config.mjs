@@ -8,12 +8,12 @@ const nextConfig = {
     return [
       {
         // matching all API routes
-        source: "../api",
+        source: "/api:path*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {
             key: "Access-Control-Allow-Origin",
-            value: process.env.SERVER_SIDE_PROXY,
+            value: process.env.SERVER_SIDE_PROXY || "*",
           }, // replace this your actual origin
           {
             key: "Access-Control-Allow-Methods",
@@ -32,8 +32,8 @@ const nextConfig = {
     return [
       // Rewrites all API requests to your Express server
       {
-        source: "/",
-        destination: "http://localhost:3001/",
+        source: "/api/:path",
+        destination: process.env.SERVER_SIDE_PROXY + ":path*",
       },
     ];
   },
