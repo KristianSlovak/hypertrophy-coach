@@ -25,9 +25,13 @@ connection_pool.on("error", (err) => {
 const app: Application = express();
 app.use(
   cors({
-    origin: env_settings.frontend_port,
+    origin: env_settings.frontend_port || "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: [
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept",
+      "Authorization",
+    ],
     credentials: true,
     preflightContinue: true,
   })
