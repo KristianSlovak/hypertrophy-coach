@@ -28,17 +28,13 @@ app.use(
   cors({
     origin: env_settings.frontend_port || "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
     preflightContinue: true,
   })
 );
 
 app.options("*", cors());
-
-app.use(function (req: Request, res: Response, next: NextFunction) {
-  res.header("Access-Control-Allow-Headers", "Origin, Content-Type");
-  next();
-});
 
 app.use(express.json());
 
