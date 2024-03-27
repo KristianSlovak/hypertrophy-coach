@@ -1,6 +1,7 @@
-'use client';
+'use server'
 
-import { useEffect, useState } from "react";
+import Link from 'next/link';
+import './page.css';
 
 type User = {
   id: number;
@@ -8,43 +9,21 @@ type User = {
 };
 
 const Home = () => {
-  const [data, setData] = useState<string[]>([]);
-  const [error, setError] = useState<string| null>(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(process.env.SERVER_SIDE_PROXY || '', 
-        {
-          method: 'GET',
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json"
-          }
-        });
-        if(!res.ok) {
-          throw new Error('Failed to fetch data.')
-        }
-        const responseData = await res.json()
-        setData(responseData.message);
-      } catch (err) {
-        console.error("Error fetching data:", err);
-        setError('Error fatching data. Please try again.')
-
-      }
-    };
-    fetchData();
-  }, []);
 
   return (
-    <div>
-      {error ? (
-        <div>Error: {error}</div>
-      ) : (
-      <h1>{data}</h1>
-      )}
+  <div className="container">
+    <div className='h1Div'>
+    <h1 className="welcomeH1">Welcome to the</h1>
+    <h1 className="welcomeH1">Hypertrophy Coach app</h1>
     </div>
-  )
+    <div className='h2Div'>
+    <h2 className="homeH2">This app serves as helper with tracking workouts and progress. 
+      </h2>
+      <h2 className='homeH2'>Aditionaly I plan to add feature for the app to recomend next training for user based on feedback.</h2>
+    </div>
+      <Link href={'/login'} className='homeButton'>Start</Link>
+    </div>)
+
 };
 
 export default Home;
