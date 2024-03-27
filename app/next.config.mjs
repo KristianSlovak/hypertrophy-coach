@@ -33,7 +33,7 @@ const nextConfig = {
       // Rewrites all API requests to your Express server
       {
         source: "/api/:path",
-        destination: process.env.SERVER_SIDE_PROXY + ":path*",
+        destination: "localhost:3001" + ":path*",
       },
     ];
   },
