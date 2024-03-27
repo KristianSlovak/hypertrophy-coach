@@ -14,7 +14,14 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(process.env.SERVER_SIDE_PROXY || '');
+        const res = await fetch(process.env.SERVER_SIDE_PROXY || '', 
+        {
+          method: 'GET',
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json"
+          }
+        });
         if(!res.ok) {
           throw new Error('Failed to fetch data.')
         }
