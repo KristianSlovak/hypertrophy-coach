@@ -1,6 +1,6 @@
 import cors from "cors";
 import dotenv from "dotenv";
-import express, { Application, Request, Response } from "express";
+import express, { Application, NextFunction, Request, Response } from "express";
 import mysql from "mysql";
 
 dotenv.config();
@@ -28,20 +28,20 @@ app.use(
   cors({
     origin: env_settings.frontend_port || "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: [
-      "Origin",
-      "X-Requested-With",
-      "Content-Type",
-      "Accept",
-      "Authorization",
-      "Access-Control-Allow-Headers",
-    ],
     credentials: true,
     preflightContinue: true,
   })
 );
 
 app.options("*", cors());
+
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  next();
+});
 
 app.use(express.json());
 
