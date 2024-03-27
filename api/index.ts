@@ -34,11 +34,16 @@ app.use(
       "Content-Type",
       "Accept",
       "Authorization",
+      "Access-Control-Allow-Headers",
     ],
     credentials: true,
     preflightContinue: true,
   })
 );
+
+app.options("*", cors());
+
+app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
   res.send({ message: "Express + Typescript Server" });
