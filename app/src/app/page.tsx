@@ -9,23 +9,33 @@ type User = {
 
 const Home = () => {
   const [data, setData] = useState<string[]>([]);
+  const [error, setError] = useState<string| null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(process.env.SERVER_SIDE_PROXY +'')
+        const res = await fetch(process.env.SERVER_SIDE_PROXY || '');
+        if(!res.ok) {
+          throw new Error('Failed to fetch data.')
+        }
         const responseData = await res.json()
-          setData(responseData.message);
+        setData(responseData.message);
       } catch (err) {
-        console.log(err)
+        console.error("Error fetching data:", err);
+        setError('Error fatching data. Please try again.')
+
       }
     };
     fetchData();
-  }, [data]);
+  }, []);
 
   return (
     <div>
+      {error ? (
+        <div>Error: {error}</div>
+      ) : (
       <h1>{data}</h1>
+      )}
     </div>
   )
 };
